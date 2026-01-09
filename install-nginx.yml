@@ -1,0 +1,32 @@
+---
+- name: Install and start NGINX
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Create welcome page
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <html>
+          <body>
+            <h1>🎉 NGINX Installed Successfully</h1>
+            <p>Deployed via Jenkins + Ansible</p>
+          </body>
+          </html>
+

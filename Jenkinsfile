@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Ansible Playbook') {
+            steps {
+                sh '''
+                  ansible-playbook -i inventory.ini install-nginx.yml
+                '''
+            }
+        }
+    }
+}
+
